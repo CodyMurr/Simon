@@ -10,12 +10,6 @@ body {
     height: 100vh;
 }
 
-div {
-    width: 40%;
-    height: 40%;
-    margin: .15% .6%;
-}
-
 .flex {
     display: flex;
     justify-content: space-evenly;
@@ -28,28 +22,37 @@ div {
 
 #board {
     flex-flow: row wrap;
-    width: 65%;
+    width: 55%;
     height: 100%;
 }
+
+#board > div {
+    width: 40%;
+    height: 40%;
+    margin: .15% .6%;
+    background-color: #fff;
+    border: 1em solid;
+}
+
 #board div:hover, #text > h1:hover {
     cursor: pointer;
     color:#1f72a1
 }
 
-#green {
-    background-color: #00ff00;
+#board > #c0 {
+    border-color: #00ff00;
 }
 
-#red {
-    background-color: #ff0000;
+#board > #c1 {
+    border-color: #ff0000;
 }
 
-#yellow {
-    background-color: #ffff00;
+#board > #c2 {
+    border-color: #ffff00;
 }
 
-#blue {
-    background-color: #00ff;
+#board > #c3 {
+    border-color: #00ff;
 }
 
 #center {
@@ -65,7 +68,7 @@ div {
     font-size: 2em;
 }
 
-#round {
+#round, #reset {
     display: none;
 }
 

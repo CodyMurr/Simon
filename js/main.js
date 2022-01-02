@@ -20,18 +20,16 @@ const reset = document.getElementById('reset');
 start.addEventListener("click", init);
 
 boardEls.forEach(color => {
-    color.addEventListener("mousedown", (e) => {
-        e.target.style.backgroundColor = `radial-gradient(#fff, ${e.target.id})`;
-    });
-    color.addEventListener("mouseup", (e) => {
-        e.target.style.backgroundColor = `${e.target.id}`;
-    });
+    color.addEventListener("click", handleClick);
 });
 
 /*----- functions -----*/
 
 function init() {
-    board = [null, null, null, null];
+    board = [
+        'green', 'red',
+        'yellow', 'blue'
+    ]
     round = 1;
     turn = 1;
     pattern = [];
@@ -39,8 +37,17 @@ function init() {
     render();
 };
 
-
+function handleClick(e) {
+    const idx = boardEls.indexOf(e.target);
+    const color = board[idx];
+    e.target.style.backgroundColor = `${color}`;
+    setTimeout(() => {
+        e.target.style.backgroundColor = '#fff';
+    }, 200);
+}
 
 function render() {
     reset.style.display = winner ? 'inline-block' : 'none';
+    start.style.display = 'none';
+    currentRd.style.display = 'inline-block';
 }

@@ -1,0 +1,12 @@
+1. Upon clicking "start" button:
+    1.a. Three-second countdown is initiated and displayed center-screen.
+    1.b. Board is centered on page and a random color is generated as the computer's first choice.
+    1.c. Div with id matching computer's choice is highlighted for one second and turn variable changes value to user.
+2. Pattern array is iterated over in five second async function while user attempts to match it.
+    2.a. User attempt is iterated over to check against computer pattern.
+    2.b. If both arrays match, turn switches back to computer and round advances.
+3. Repeat steps 1.b. through 2.b. 
+    3.a. Pattern array holds all values from previous rounds and user must match exactly to avoivd elimination.
+    3.b. On rounds 5, 9, and 13, the game speed increases.
+4. If user fails to match pattern or exceeds five second limit, "defeat" buzzer is sounded and a message is displayed declaring the winner.
+5 If user is successful through round 31, "victory" sound plays and a message declaring winner is displayed. 
