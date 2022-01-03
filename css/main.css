@@ -10,48 +10,60 @@ body {
     height: 100vh;
 }
 
+h1 {
+  color: #aaaaaa;
+}
+
 .flex {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
+.row {
+  flex-direction: row;
+}
+
 .col {
     flex-direction: column;
 }
 
+#main {
+  width: 50%;
+  height: 100%;
+}
+
 #board {
     flex-flow: row wrap;
-    width: 55%;
+    width: 100%;
     height: 100%;
 }
 
 #board > div {
-    width: 40%;
-    height: 40%;
+    width: 45%;
+    height: 45%;
     margin: .15% .6%;
     background-color: #fff;
     border: 1em solid;
 }
 
-#board div:hover, #text > h1:hover {
+#board div:hover, #start:hover, #reset:hover {
     cursor: pointer;
-    color:#1f72a1
 }
 
-#board > #c0 {
+#board > #green {
     border-color: #00ff00;
 }
 
-#board > #c1 {
+#board > #red {
     border-color: #ff0000;
 }
 
-#board > #c2 {
+#board > #yellow {
     border-color: #ffff00;
 }
 
-#board > #c3 {
+#board > #blue {
     border-color: #00ff;
 }
 
@@ -62,15 +74,32 @@ body {
     border-radius: 100%;
     background-color: rgb(82, 82, 82);
 }
-
-#text {
-    color: rgb(170, 170, 170);
-    font-size: 2em;
+#true {
+  width: 65%;
 }
 
-#round, #reset {
-    display: none;
+#false {
+    font-size: 1.5em;
+    text-align: center;
+    height: 28%;
+    padding: 0;
 }
+#false h1:hover {
+  color: #1f72a1;
+}
+
+#players {
+  justify-content: space-between;
+} 
+#players > h1 {
+  text-align: center;
+  width: 45%;
+  border-radius: 5em;
+}
+#round {
+  text-align: center;
+}
+
 
 @media only screen and (max-width: 576px) {
     body {
