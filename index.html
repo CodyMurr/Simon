@@ -10,30 +10,25 @@
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
         <script src="js/main.js" defer></script>
     </head>
-    <body>
-        <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Simon</title>
-        <link href="css/main.css" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css2?family=Squada+One&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-        <script src="js/main.js" defer></script>
-    </head>
     <body class="flex col">
+      <div id="main" class="flex row">
         <div id="board" class="flex row">
-            <div id="c0"></div>
-            <div id="c1"></div>
-            <div id="c2"></div>
-            <div id="c3"></div>
+            <div id="green"></div>
+            <div id="red"></div>
+            <div id="yellow"></div>
+            <div id="blue"></div>
         </div>
-        <section id="text">
+      </div>
+        <section id="false" class="flex col">
             <h1 id="start">Start</h1>
-            <h1 id="round">0 / 10</h1>
             <h1 id="reset">Play Again</h1>
         </section>
+        <div id="true" class="flex col">
+          <div id="players" class="flex row">
+            <h1 id="computer">Computer</h1>
+            <h1 id="user">User</h1>
+          </div>
+          <h1 id="round">0 / 10</h1>
+        </div>
     </body>
 </html>
