@@ -1,53 +1,79 @@
-/*----- constants -----*/
-const players = {
-    1: 'computer',
+const game = {
+  board: ['green', 'red', 'yellow', 'blue'],
+  players: {
+    '1': 'computer',
     '-1': 'user'
+  },
 }
 
 /*----- app's state (variables) -----*/
-let board;
-let round;
+let sequence;
+let attemptSeq;
+let playing;
 let turn;
-let pattern;
-let winner
+let round;
 
 /*----- cached element references -----*/
-const boardEls = [...document.querySelectorAll('#board > div')];
-const start = document.getElementById('start');
-const currentRd = document.getElementById('round');
-const reset = document.getElementById('reset');
-/*----- event listeners -----*/
-start.addEventListener("click", init);
 
-boardEls.forEach(color => {
-    color.addEventListener("click", handleClick);
+const boardEls = [...document.querySelectorAll('.color')];
+const start = document.getElementById('start');
+const inPlayEls = document.getElementById('true');
+const noPlayEls = document.getElementById('false');
+
+/*----- event listeners -----*/
+start.addEventListener("click", play);
+
+boardEls.forEach(section => {
+  section.addEventListener("click", handleClick);
 });
 
 /*----- functions -----*/
 
-function init() {
-    board = [
-        'green', 'red',
-        'yellow', 'blue'
-    ]
-    round = 1;
-    turn = 1;
-    pattern = [];
-    winner = null;
-    render();
-};
+inPlayEls.style.display = 'none';
+noPlayEls.style.display = 'inline-block';
 
-function handleClick(e) {
-    const idx = boardEls.indexOf(e.target);
-    const color = board[idx];
-    e.target.style.backgroundColor = `${color}`;
-    setTimeout(() => {
-        e.target.style.backgroundColor = '#fff';
-    }, 200);
+function play() {
+  sequence = [];
+  attemptSeq = [];
+  playing = true;
+  turn = 1;
+  round = 1;
+  getSequence();
+  render();
 }
 
-function render() {
-    reset.style.display = winner ? 'inline-block' : 'none';
-    start.style.display = 'none';
-    currentRd.style.display = 'inline-block';
+function getSequence() {
+  const randomIdx = Math.floor(Math.random() * boardEls.length);
+  const randomColor = game.board[randomIdx];
+  sequence.push(randomColor);
+  render(sequence);
+}
+ 
+function handleClick(e) {
+  if (!playing || !turn) return;
+  const secId = e.target.id;
+  attemptSeq.push(secId);
+  render(attemptSeq);
+}
+
+function render(arr) {
+    inPlayEls.style.display = 'inline-block';
+    noPlayEls.style.display = 'none';
+    renderInfo();
+    showSequence(arr);
+}
+
+function renderInfo() {
+  document.getElementById(game.players[turn]).style.border = '.5em solid #aaa';
+  document.getElementById('round').innerHTML = `${round} / 10`;
+}
+
+function showSequence(arr) {
+  arr.forEach(item => {
+    document.getElementById(`${item}`).style.backgroundColor = `${item}`;
+      setTimeout(() => {
+      document.getElementById(`${item}`).style.backgroundColor = '';
+    }, 400);
+    checkForWin()
+  });
 }
