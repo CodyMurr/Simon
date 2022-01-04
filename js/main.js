@@ -1,83 +1,95 @@
-const game = {
-  board: ['green', 'red', 'yellow', 'blue'],
-  players: {
-    '1': {
-      name: 'computer',
-      sequence: []
-    },
-    '-1': {
-      name: 'user',
-      sequence: []
-    }
-  }
-}
+const players = {
+  '1': 'com',
+  '-1': 'player'
+};
+
+const board = [
+  {color: 'green'}, {color: 'red'}, 
+  {color: 'yellow'}, {color: 'blue'}
+];
+
+const finalRound = 10;
+const sequence = [];
 
 /*----- app's state (variables) -----*/
 
-let playing;
-let turn;
-let round;
+let round, turn, winner;
 
 /*----- cached element references -----*/
 
 const boardEls = [...document.querySelectorAll('#board div')];
 const start = document.getElementById('start');
-const inPlayEls = document.getElementById('true');
-const noPlayEls = document.getElementById('false');
+const reset = document.getElementById('reset');
+const currentRound = document.getElementById('round');
 
 /*----- event listeners -----*/
 start.addEventListener("click", play);
-
+reset.addEventListener("click", play);
 boardEls.forEach(section => {
-  section.addEventListener("click", (e) => {
-    const idx = boardEls.indexOf(e.target);
-    const id = game.board[idx];
-    game.players['-1'].sequence.push(id);
-    render();
-  });
+  section.addEventListener("click", handleAttempt);
 });
 
 /*----- functions -----*/
 
-inPlayEls.style.display = 'none';
-noPlayEls.style.display = 'inline-block';
-
 function play() {
-  sequence = [];
-  attemptSeq = [];
-  playing = true;
-  turn = 1;
   round = 1;
-  setTimeout(getSequence, 2000);
+  turn = 1;
+  winner = false;
+  getSequence(sequence);
   render();
 }
 
-function getSequence() {
-  const randomIdx = Math.floor(Math.random() * boardEls.length);
-  const randomColor = game.board[randomIdx];
-  game.players['1'].sequence.push(randomColor);
+function getSequence(arr) {
+  while (arr.length < round) {
+    const randomIdx = Math.floor(Math.random() * boardEls.length);
+    const randomColor = board[randomIdx].color;
+    arr.push(randomColor);
+  } 
   render();
+  renderColors(arr);
 }
 
-function render(arr) {
-    inPlayEls.style.display = 'inline-block';
-    noPlayEls.style.display = 'none';
-    renderInfo();
-    showSequence();
+function handleAttempt(e) {
+  const playerSeq = [];
+  const idx = boardEls.indexOf(e.target);
+  const color = board[idx].color;
+  playerSeq.push(color);
+  winner = checkSequence(playerSeq);
+  render();
+  renderColors(playerSeq);
 }
 
-function renderInfo() {
-
-  document.getElementById(game.players[turn].name).style.border = '.25em solid #aaa';
-  document.getElementById('round').innerHTML = `${round} / 10`;
+function render() {
+  start.style.display = 'none';
+  document.getElementById('players').style.display = 'inline-block';
+  document.getElementById(players[turn]).style.border = '#aaa';
+  currentRound.innerHTML = `${round} / ${finalRound}`;
 }
 
-function showSequence() {
-  game.players[turn].sequence.forEach(item => {
-    document.getElementById(`${item}`).style.backgroundColor = `${item}`;
-      setTimeout(() => {
-      document.getElementById(`${item}`).style.backgroundColor = '';
-    }, 400);
-    turn *= -1;
-  });
+function renderColors(arr) {
+  let index = 0;
+  const color = document.getElementById(arr[index]);
+  color.style.backgroundColor = arr[index];
+  setTimeout(() => {
+    color.style.backgroundColor = '';
+  }, 400);  
+  const colorSequence =
+    setInterval(() => {
+      index+=1;
+      if (index <= arr.length) {
+        clearInterval(colorSequence);
+      }
+  }, 500);
+  turn *= -1;
+}
+
+
+function checkSequence(arr) {
+  for(let i = 0; i < round; i++) {
+    if (arr[i] === sequence[round-1][i]) {
+      round += 1;
+      getSequence(); 
+      render();
+    }
+  }
 }
