@@ -50,6 +50,7 @@ function getSequence(arr) {
 }
 
 function handleAttempt(e) {
+  if (turn > 0 || winner) return;
   const playerSeq = [];
   const idx = boardEls.indexOf(e.target);
   const color = board[idx].color;
@@ -61,9 +62,11 @@ function handleAttempt(e) {
 
 function render() {
   start.style.display = 'none';
+  reset.style.display = winner ? 'inline-block' : 'none';
   document.getElementById('players').style.display = 'inline-block';
   document.getElementById(players[turn]).style.border = '#aaa';
   currentRound.innerHTML = `${round} / ${finalRound}`;
+  
 }
 
 function renderColors(arr) {
@@ -86,10 +89,16 @@ function renderColors(arr) {
 
 function checkSequence(arr) {
   for(let i = 0; i < round; i++) {
-    if (arr[i] === sequence[round-1][i]) {
-      round += 1;
-      getSequence(); 
-      render();
+    if (arr[i] === sequence[i]) {
+      checkWin();
     }
+  }
+}
+function checkWin() {
+  if (round === finalRound) {
+    winner = players['-1'];
+  } else {
+    round += 1;
+    getSequence(sequence); 
   }
 }
