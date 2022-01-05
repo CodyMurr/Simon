@@ -11,24 +11,19 @@
         <script src="js/main.js" defer></script>
     </head>
     <body class="flex col">
-      <div id="main" class="flex row">
+      
         <div id="board" class="flex row">
             <div id="green"></div>
             <div id="red"></div>
             <div id="yellow"></div>
             <div id="blue"></div>
         </div>
-      </div>
-        <section id="false" class="flex col">
-            <h1 id="start">Start</h1>
-            <h1 id="reset">Play Again</h1>
-        </section>
-        <div id="true" class="flex col">
-          <div id="players" class="flex row">
-            <h1 id="computer">Computer</h1>
-            <h1 id="user">User</h1>
-          </div>
-          <h1 id="round">0 / 10</h1>
-        </div>
+        <span id="center" class="flex col">
+          <h1 id="title">SIMON</h1>
+          <label for="power">Power</label>
+          <section id="toggle" class="flex row">
+            <input id="power" type="checkbox" name="power">
+          </section>
+        </span>
     </body>
 </html>
