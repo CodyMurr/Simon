@@ -13,6 +13,10 @@ body {
 h1 {
   color: #aaaaaa;
 }
+label {
+    color: #fff;
+    font-size: 2em;
+}
 
 .flex {
     display: flex;
@@ -28,15 +32,10 @@ h1 {
     flex-direction: column;
 }
 
-#main {
-  width: 50%;
-  height: 100%;
-}
-
 #board {
     flex-flow: row wrap;
-    width: 100%;
-    height: 100%;
+    width: 600px;
+    height: 600px;
 }
 
 #board > div {
@@ -53,40 +52,46 @@ h1 {
 
 #board > #green {
     border-color: #00ff00;
+    border-top-left-radius: 100%;
 }
 
 #board > #red {
     border-color: #ff0000;
+    border-top-right-radius: 100%;
 }
 
 #board > #yellow {
     border-color: #ffff00;
+    border-bottom-left-radius: 100%;
 }
 
 #board > #blue {
     border-color: #00ff;
+    border-bottom-right-radius: 100%;
 }
 
 #center {
     position: absolute;
-    width: 35%;
-    height: 65%;
+    width: 300px;
+    height: 300px;
     border-radius: 100%;
-    background-color: rgb(82, 82, 82);
+    background-color: #000;
 }
-#true {
-  width: 65%;
+#title {
+    color: #fff;
+    font-size: 4em;
+}
+#power {
+    margin-left: 0;
+}
+#toggle {
+    width: 30px;
+    height: 15px;
+    background-color: #525252;
+    justify-content: flex-start;
+    
 }
 
-#false {
-    font-size: 1.5em;
-    text-align: center;
-    height: 28%;
-    padding: 0;
-}
-#false h1:hover {
-  color: #1f72a1;
-}
 
 #players {
   justify-content: space-between;
