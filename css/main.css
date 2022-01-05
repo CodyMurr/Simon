@@ -38,35 +38,36 @@ label {
     height: 600px;
 }
 
-#board > div {
+#board > button {
     width: 45%;
     height: 45%;
     margin: .15% .6%;
     background-color: #fff;
-    border: 1em solid;
+    border: 1em solid #fff;
+    opacity: 50%;
 }
 
-#board div:hover, #start:hover, #reset:hover {
+#board button:hover, #start:hover, #reset:hover {
     cursor: pointer;
 }
 
 #board > #green {
-    border-color: #00ff00;
+    background-color: #00ff00;
     border-top-left-radius: 100%;
 }
 
 #board > #red {
-    border-color: #ff0000;
+    background-color: #ff0000;
     border-top-right-radius: 100%;
 }
 
 #board > #yellow {
-    border-color: #ffff00;
+    background-color: #ffff00;
     border-bottom-left-radius: 100%;
 }
 
 #board > #blue {
-    border-color: #00ff;
+    background-color: #00ff;    
     border-bottom-right-radius: 100%;
 }
 
@@ -85,14 +86,14 @@ label {
 #counter {
     width: 40px;
     height: 30px;
-    background-color: #ff1947;
-    color: #940000;
     font-size: 1.5em;
     margin-bottom: 15px;
     margin-top: 0;
+    text-align: center;
 }
 #power {
     margin-left: 0;
+    
 }
 #toggle {
     width: 30px;
@@ -115,17 +116,29 @@ label {
 }
 
 #players {
-  justify-content: space-between;
+    justify-content: space-between;
 } 
 #players > h1 {
-  text-align: center;
-  width: 45%;
-  border-radius: 5em;
+    text-align: center;
+    width: 45%;
+    border-radius: 5em;
 }
 #round {
-  text-align: center;
+    text-align: center;
 }
 
+.on {
+    background-color: #ff1947;
+    color: #940000;
+    text-align: center;
+}
+.off {
+    background-color: #3f3f3f;
+}
+
+#board .pressed {
+    opacity: 100%;
+}
 
 @media only screen and (max-width: 576px) {
     body {
