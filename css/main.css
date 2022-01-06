@@ -90,6 +90,7 @@ label {
     margin-bottom: 15px;
     margin-top: 0;
     text-align: center;
+    background-color: #ff1947;
 }
 #power {
     margin-left: 0;
@@ -128,13 +129,10 @@ label {
 }
 
 .on {
-    background-color: #ff1947;
     color: #940000;
     text-align: center;
 }
-.off {
-    background-color: #3f3f3f;
-}
+
 
 #board .pressed {
     opacity: 100%;
@@ -144,7 +142,7 @@ label {
     body {
         background-color: rgb(32, 32, 32);
         margin: 0 auto;
-        flex-flow: row wrap;
+        flex-direction: column;
         width: 450px;
         height: 450px;
     }
@@ -156,6 +154,11 @@ label {
     }
     #center {
         width: 50%;
-        height: 40%;
+        height: 25%;
+        font-size: .5em;
+    }
+    #start {
+        width: 15%;
+        height: 30%;
     }
 }
