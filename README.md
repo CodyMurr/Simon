@@ -8,11 +8,11 @@ My spin on the classic memory game we all grew up playing. WARNING: Equally as f
 
 ## ScreenShots 
 
-![board](board.jpg)
+![board](assets/board.jpg)
 
-![round 1](board-round_1.jpg)
+![round 1](assets/board-round_1.jpg)
 
-![loss](board-loss.jpg)
+![loss](assets/board-loss.jpg)
 
 ---
 
