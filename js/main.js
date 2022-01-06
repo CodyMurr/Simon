@@ -2,7 +2,7 @@ const board = [
   'green', 'red', 'yellow', 'blue'
 ];
 let round = 0;
-let on, playerSeq, computerSeq, playerTurn, lose;
+let on, computerSeq, playerTurn, lose;
 
 const power = document.getElementById('toggle');
 const counter = document.getElementById('counter');
@@ -38,24 +38,13 @@ function renderOff() {
 }
 
 boardEls.forEach (btn => {
-  btn.addEventListener("click", (e) => {
-    if (!on || !playerTurn) return;
-    const button = e.target;
-    playerSeq.push(button.id);
-    button.classList.add('pressed');
-    setTimeout(() => {
-      button.classList.remove('pressed');
-    }, 250);
-  });
-  render();
+  btn.addEventListener("click", checkSequence);
 });
 
 function init() {
-  playerSeq = [];
   computerSeq = [];
   round = 1;
   lose = false;
-  getSequence();
   render();
 }
 
@@ -69,6 +58,7 @@ function getSequence() {
 
 function render() {
   counter.innerHTML = round;
+  getSequence();
 }
 
 function renderBoard() {
@@ -79,4 +69,20 @@ function renderBoard() {
     }, 250);
   });
   playerTurn = true;
+  checkSequence(e);
+}
+
+function checkSequence(e) {
+  for (let i = 0; i < computerSeq.length; i++) {
+    if (!on || !playerTurn) return;
+    const button = e.target;
+    button.classList.add('pressed');
+    setTimeout(() => {
+      button.classList.remove('pressed');
+    }, 250);
+    if (button.id === computerSeq[i]) {
+      round++;
+      render();
+    }
+  }
 }
