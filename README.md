@@ -8,11 +8,11 @@ My spin on the classic memory game we all grew up playing. WARNING: Equally as f
 
 ## ScreenShots 
 
-![board](./board.jpg)
+![board](board.jpg)
 
-![round 1](./board-round_1.jpg)
+![round 1](board-round_1.jpg)
 
-![loss](./board-loss.jpg)
+![loss](board-loss.jpg)
 
 ---
 
@@ -31,6 +31,8 @@ The rules are simple: Follow the pattern for as long as you can but most importa
 -CSS
 
 -Vanilla Javascript
+
+The app utilizes the DOM API and the Model, View, Controller design pattern. 
 
 ---
 
