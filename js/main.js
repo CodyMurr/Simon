@@ -3,7 +3,19 @@ const GAP_TIME = 500;
 const MAX_ROUNDS = 10;
 const LEVEL_JUMP = 4;
 const LEVEL_DEC_TIME = 300;
-const board = ['green', 'red', 'yellow', 'blue'];
+const board = [
+  'green', 
+  'red', 
+  'yellow', 
+  'blue'
+];
+
+const sounds = [
+  new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"),
+  new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"),
+  new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"),
+  new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3")
+]
 
 let LIT_TIME;
 let compSeq;
@@ -49,7 +61,7 @@ function handlePlayerSeq(e) {
   if (!on || compTurn) return;
   const targetIdx = colors.indexOf(e.target);
   if (targetIdx === -1) return;
-  // add audio
+  sounds[targetIdx].play();
   playerSeq.push(targetIdx);
   colors[targetIdx].style.opacity = '100%';
   setTimeout(() => {
@@ -76,7 +88,7 @@ function render() {
     }
     const color = colors[compSeq[index]];
     color.style.opacity = '100%';
-    // add audio
+    sounds[compSeq[index]].play();
     setTimeout(() => {
       color.style.opacity = '50%'
     }, LIT_TIME);
