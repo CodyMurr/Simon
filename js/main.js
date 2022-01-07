@@ -95,6 +95,7 @@ function init() {
 }
 
 function play() {
+  
   getCompSeq();
 }
 
