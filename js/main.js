@@ -17,19 +17,19 @@ const sounds = [
   new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3")
 ]
 
-let LIT_TIME;
-let compSeq;
-let playerSeq;
-let compTurn;
-let intervalId;
-let wrong;
-let on;
-let win;
+let LIT_TIME, compSeq, playerSeq, compTurn, intervalId, wrong, on, win;
 
 const colors = [...document.querySelectorAll('#board button')];
 const toggle = document.querySelector('#toggle');
 const onBtn = document.querySelector('#toggle > #power');
 const startBtn = document.querySelector('#start');
+
+function lightOff() {
+  colors[0].classList.remove('pressed');
+  colors[1].classList.remove('pressed');
+  colors[2].classList.remove('pressed');
+  colors[3].classList.remove('pressed');
+}
 
 onBtn.addEventListener("click", (evt) => {
   if (onBtn.checked === true) {
@@ -58,14 +58,14 @@ colors.forEach(color => {
 
 
 function handlePlayerSeq(e) {
-  if (!on || compTurn) return;
+  if (!on || compTurn || wrong) return;
   const targetIdx = colors.indexOf(e.target);
   if (targetIdx === -1) return;
   sounds[targetIdx].play();
   playerSeq.push(targetIdx);
-  colors[targetIdx].style.opacity = '100%';
+  colors[targetIdx].classList.add('pressed');
   setTimeout(() => {
-    if (!wrong) colors[targetIdx].style.opacity = '50%';
+    if (!wrong) colors[targetIdx].classList.remove('pressed');
   }, 250);
   if (checkComplete()) {
     getCompSeq();
@@ -87,10 +87,10 @@ function render() {
       return;
     }
     const color = colors[compSeq[index]];
-    color.style.opacity = '100%';
+    color.classList.add('pressed');
     sounds[compSeq[index]].play();
     setTimeout(() => {
-      color.style.opacity = '50%'
+      color.classList.remove('pressed');
     }, LIT_TIME);
     index++;
     if (index >= compSeq.length) {
@@ -107,11 +107,11 @@ function init() {
 }
 
 function play() {
-  
   getCompSeq();
 }
 
 function gameOver() {
+  lightOff();
   wrong = true;
   counter.innerHTML = '!!!'
 }
