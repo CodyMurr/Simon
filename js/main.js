@@ -33,14 +33,12 @@ function lightOff() {
 
 onBtn.addEventListener("click", (evt) => {
   if (onBtn.checked === true) {
-    console.log("powered on");
     init();
     on = true;
     toggle.style.justifyContent = 'flex-end';
     counter.classList.add('on');
     counter.innerHTML = '-';
   } else {
-    console.log("powered off");
     on = false;
     toggle.style.justifyContent = 'flex-start';
     counter.classList.remove('on');
