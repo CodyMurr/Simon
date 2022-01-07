@@ -65,10 +65,10 @@ function handlePlayerSeq(e) {
   setTimeout(() => {
     if (!wrong) colors[targetIdx].classList.remove('pressed');
   }, 250);
-  if (checkComplete()) {
+  if (checkSequence()) {
     getCompSeq();
   } else {
-    checkCurrent();
+    checkMatch();
   }
 }
 
@@ -122,11 +122,11 @@ function getCompSeq() {
   handleSequence();
 }
 
-function checkComplete() {
+function checkSequence() {
   return JSON.stringify(playerSeq) === JSON.stringify(compSeq);
 }
 
-function checkCurrent() {
+function checkMatch() {
   for (let i = 0; i < playerSeq.length; i++) {
     playerSeq[i] === compSeq[i] ? true : gameOver();
   }
