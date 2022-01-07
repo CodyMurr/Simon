@@ -45,3 +45,4 @@ The game will display a color for the player to repeat and with each level a new
 -Add attempts feature that allows the player a certain number of failed attempts before losing the game
 
 -Add "strict" mode to only allow for one failed attempt
+
