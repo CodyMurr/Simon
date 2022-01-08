@@ -159,6 +159,11 @@ label {
         top: 45%;
         font-size: .75rem;
     }
+    label[for="start"] {
+        position: absolute;
+        left: 15%;
+        top: 50%;
+    }
 
     #board {
         width: 300px;
@@ -173,16 +178,14 @@ label {
         border-radius: 1em;
     }
 
-    #start {
-        width: 20px;
-        height: 50px;
-        margin: 0;
-    }
 
     #start-btn {
-        height: 20px;
-        height: 50px;
+        position: absolute;
+        width: 25px;
+        height: 25px;
         background-color: #ff0000;
+        left: 15%;
+        top: 60%;
     }
 
     #counter {
@@ -202,17 +205,5 @@ label {
 
     #toggle > #power {
         height: 50px;
-    }
-
-    #start {
-        position: absolute;
-        left: 15%;
-        top: 40%;
-        font-size: 1rem;
-    }
-
-    #start-btn {
-        width: 20px;
-        height: 20px;
     }
 }
