@@ -4,18 +4,11 @@ const MAX_ROUNDS = 10;
 const LEVEL_JUMP = 4;
 const LEVEL_DEC_TIME = 300;
 const board = [
-  'green', 
-  'red', 
-  'yellow', 
-  'blue'
+  {color:'green', sound: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3")}, 
+  {color: 'red', sound: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3")},
+  {color: 'yellow', sound: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3")},
+  {color: 'blue', sound: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3")}
 ];
-
-const sounds = [
-  new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"),
-  new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"),
-  new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"),
-  new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3")
-]
 
 let LIT_TIME, compSeq, playerSeq, compTurn, intervalId, wrong, on, win;
 
@@ -59,7 +52,7 @@ function handlePlayerSeq(e) {
   if (!on || compTurn || wrong) return;
   const targetIdx = colors.indexOf(e.target);
   if (targetIdx === -1) return;
-  sounds[targetIdx].play();
+  board[targetIdx].sound.play();
   playerSeq.push(targetIdx);
   colors[targetIdx].classList.add('pressed');
   setTimeout(() => {
@@ -86,7 +79,7 @@ function render() {
     }
     const color = colors[compSeq[index]];
     color.classList.add('pressed');
-    sounds[compSeq[index]].play();
+    board[compSeq[index]].sound.play();
     setTimeout(() => {
       color.classList.remove('pressed');
     }, LIT_TIME);
