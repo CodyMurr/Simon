@@ -10,7 +10,7 @@ const board = [
   {color: 'blue', sound: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3")}
 ];
 
-let LIT_TIME, compSeq, playerSeq, compTurn, intervalId, wrong, on, win;
+let LIT_TIME, compSeq, playerSeq, compTurn, intervalId, preCycle, wrong, on, win;
 
 const colors = [...document.querySelectorAll('#board button')];
 const toggle = document.querySelector('#toggle');
@@ -24,6 +24,18 @@ function lightOff() {
   colors[3].classList.remove('pressed');
 }
 
+const cycleColors = () => {
+  let index = 0;
+  preCycle = setInterval(() => {
+      colors[index].classList.add('pressed');
+      setTimeout(() => {
+          lightOff();
+      }, 750)
+      index++;
+      if (index >= colors.length) index = 0;
+  }, 1000);
+}
+
 onBtn.addEventListener("click", (evt) => {
   if (onBtn.checked === true) {
     init();
@@ -32,6 +44,7 @@ onBtn.addEventListener("click", (evt) => {
     counter.classList.add('on');
     counter.innerHTML = '-';
   } else {
+    cycleColors();
     on = false;
     toggle.style.justifyContent = 'flex-start';
     counter.classList.remove('on');
@@ -65,6 +78,7 @@ function handlePlayerSeq(e) {
   }
 }
 
+
 function handleSequence() {
   LIT_TIME = BASE_LIT_TIME - Math.floor(compSeq.length / LEVEL_JUMP) * LEVEL_DEC_TIME;
   render();
@@ -91,10 +105,13 @@ function render() {
   }, LIT_TIME + GAP_TIME);
 }
 
+cycleColors();
+
 function init() {
   compSeq = [];
   wrong = false;
   win = false;
+  clearInterval(preCycle);
 }
 
 function play() {
