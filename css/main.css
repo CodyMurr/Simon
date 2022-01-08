@@ -179,6 +179,12 @@ label {
         margin: 0;
     }
 
+    #start-btn {
+        height: 20px;
+        height: 50px;
+        background-color: #ff0000;
+    }
+
     #counter {
         height: 50px;
         width: 75px;
