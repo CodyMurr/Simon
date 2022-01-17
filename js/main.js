@@ -1,8 +1,11 @@
+/*-------- constants ---------*/ 
+
 const BASE_LIT_TIME = 1000;
 const GAP_TIME = 500;
 const MAX_ROUNDS = 10;
 const LEVEL_JUMP = 4;
 const LEVEL_DEC_TIME = 300;
+const MAX_ATTEMPTS = 3;
 const board = [
   {color:'green', sound: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3")}, 
   {color: 'red', sound: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3")},
@@ -10,31 +13,18 @@ const board = [
   {color: 'blue', sound: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3")}
 ];
 
+/*----- app's state (variables) -----*/
+
 let LIT_TIME, compSeq, playerSeq, compTurn, intervalId, preCycle, wrong, on, win;
+
+/*----- cached element references -----*/
 
 const colors = [...document.querySelectorAll('#board button')];
 const toggle = document.querySelector('#toggle');
 const onBtn = document.querySelector('#toggle > #power');
 const startBtn = document.querySelector('#start');
 
-function lightOff() {
-  colors[0].classList.remove('pressed');
-  colors[1].classList.remove('pressed');
-  colors[2].classList.remove('pressed');
-  colors[3].classList.remove('pressed');
-}
-
-const cycleColors = () => {
-  let index = 0;
-  preCycle = setInterval(() => {
-      colors[index].classList.add('pressed');
-      setTimeout(() => {
-          lightOff();
-      }, 750)
-      index++;
-      if (index >= colors.length) index = 0;
-  }, 1000);
-}
+/*----- event listeners -----*/
 
 onBtn.addEventListener("click", (evt) => {
   if (onBtn.checked === true) {
@@ -60,6 +50,26 @@ colors.forEach(color => {
   color.addEventListener("click", handlePlayerSeq);
 });
 
+/*----- functions -----*/
+
+function lightOff() {
+  colors[0].classList.remove('pressed');
+  colors[1].classList.remove('pressed');
+  colors[2].classList.remove('pressed');
+  colors[3].classList.remove('pressed');
+}
+
+const cycleColors = () => {
+  let index = 0;
+  preCycle = setInterval(() => {
+      colors[index].classList.add('pressed');
+      setTimeout(() => {
+          lightOff();
+      }, 750)
+      index++;
+      if (index >= colors.length) index = 0;
+  }, 1000);
+}
 
 function handlePlayerSeq(e) {
   if (!on || compTurn || wrong) return;
@@ -108,6 +118,7 @@ function render() {
 cycleColors();
 
 function init() {
+  attempts = 0;
   compSeq = [];
   wrong = false;
   win = false;
@@ -119,9 +130,9 @@ function play() {
 }
 
 function gameOver() {
-  lightOff();
   wrong = true;
-  counter.innerHTML = '!!!'
+  counter.innerHTML = '!!!';
+  lightOff();
 }
 
 function getCompSeq() {
@@ -141,3 +152,4 @@ function checkMatch() {
     playerSeq[i] === compSeq[i] ? true : gameOver();
   }
 }
+
