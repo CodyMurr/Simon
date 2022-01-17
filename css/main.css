@@ -79,11 +79,11 @@ label {
     justify-content: space-around;
 }
 #title {
-    font-family: 'Squada One', cursive;
     color: #fff;
-    font-size: 4.5em;
     letter-spacing: .15em;
     margin-bottom: 0;
+    font-size: 4em;
+    font-family: 'Squada One', cursive;
 }
 #counter {
     width: 40px;
