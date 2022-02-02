@@ -15,7 +15,7 @@ const board = [
 
 /*----- app's state (variables) -----*/
 
-let LIT_TIME, compSeq, playerSeq, compTurn, intervalId, preCycle, wrong, on, playing, win, currentAttempt;
+let LIT_TIME, compSeq, playerSeq, compTurn, intervalId, preCycle, wrong, on, playing, win, lose;
 
 /*----- cached element references -----*/
 
@@ -44,6 +44,7 @@ onBtn.addEventListener("click", (evt) => {
 
 startBtn.addEventListener("click", (evt) => {
   if (playing) return;
+  if (lose) init();
   if (on || win) play();
 });
 
@@ -122,6 +123,7 @@ function init() {
   compSeq = [];
   wrong = false;
   win = false;
+  lose = false;
   clearInterval(preCycle);
 }
 
@@ -131,9 +133,10 @@ function play() {
 }
 
 function gameOver() {
+  counter.innerHTML = '!!!';
+  lose = true;
   wrong = true;
   playing = false;
-  counter.innerHTML = '!!!';
   lightOff();
 }
 
